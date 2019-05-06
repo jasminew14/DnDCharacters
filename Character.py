@@ -1,8 +1,9 @@
 import random
+import pickle
 
 class Character(object):
 
-    def __init__(self, name):
+    def __init__(self, name, wins = 0):
         self.name = name
         self.intelligence = random.randint(1, 20)
         self.strength = random.randint(1, 20)
@@ -10,6 +11,7 @@ class Character(object):
         self.dexterity = random.randint(1, 20)
         self.health = random.randint(50, 100)
         self.characterList = []
+        self.wins
 
     """def nameDuplicate(self):
         if len(self.characterList) > 0:
@@ -22,7 +24,11 @@ class Character(object):
 
                             False"""
 
+
     def __str__(self):
-        return "Your name is " + self.name + " Your stats are \n Strength: " + str(self.strength) + "\n Intelligence: "\
+        return "Your name is " + self.name + "\n Your stats are \n Strength: " + str(self.strength) + "\n Intelligence: "\
                + str(self.intelligence) + "\n Luck: " + str(self.luck) + \
                "\n Dexterity: " + str(self.dexterity) + "\n Health: " + str(self.health)
+
+
+
