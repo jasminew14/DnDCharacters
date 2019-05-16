@@ -25,7 +25,8 @@ class Character(object):
 
                             False"""
     def getattributes(self):
-        return "Strength: " + str(self.health)
+        return self.name + "," + self.race + "," + str(self.health) + "," + str(self.luck) + "," +\
+               str(self.strength) + "," + str(self.intelligence) + "," + str(self.dexterity)
 
     def __str__(self):
         return "You are " + self.name + " the " + self.race + "\n Your stats are \n Strength: " + str(self.strength) + \
