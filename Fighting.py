@@ -2,8 +2,29 @@ from Management import Management
 import time
 import random
 
+character1wins = 0
+character2wins = 0
+
+
+def increment1():
+    global character1wins
+    character1wins = character1wins + 1
+    return character1wins
+
+
+def increment2():
+    global character2wins
+    character2wins = character2wins + 1
+    return character2wins
+
+def reset():
+    global character1wins
+    global character2wins
+    character1wins = 0
+    character2wins = 0
 
 class Fighting(object):
+
 
     def rolldice(self):
         return random.randint(1, 20)
@@ -36,6 +57,7 @@ class Fighting(object):
                     print(character2 + "'s health is now " + str(character2Health))
                     if character2Health <= 0:
                         print(character1 + " is the winner")
+                        increment1()
                         return False
             if character1DiceRoll < 10:
                 print(character1 + " missed")
@@ -55,6 +77,7 @@ class Fighting(object):
                     print(character1 + "'s health is now " + str(character1Health))
                     if character1Health <= 0:
                         print(character2 + " is the winner")
+                        increment2()
                         return False
             if character2DiceRoll < 10:
                 print(character2 + " missed")
@@ -88,6 +111,7 @@ class Fighting(object):
                     print(character2 + "'s health is now " + str(character2Health))
                     if character2Health <= 0:
                         print(character1 + " is the winner")
+                        increment1()
                         return False
             if character1DiceRoll < 10:
                 print(character1 + " missed")
@@ -107,15 +131,17 @@ class Fighting(object):
                     print(character1 + "'s health is now " + str(character1Health))
                     if character1Health <= 0:
                         print(character2 + " is the winner")
+                        increment2()
                         return False
             if character2DiceRoll < 10:
                 print(character2 + " missed")
+
     def dexterityncecompetition(self, character1, character2):
         managementObject = Management
         character1Health = managementObject.loadcharacterhealth(None, character1)
         character2Health = managementObject.loadcharacterhealth(None, character2)
-        character1Dexterity = managementObject.loadcharacterstrength(None,character1)
-        character2Dexterity = managementObject.loadcharacterstrength(None,character2)
+        character1Dexterity = managementObject.loadcharacterdexterity(None,character1)
+        character2Dexterity = managementObject.loadcharacterdexterity(None,character2)
         character1Luck = managementObject.loadcharacterluck(None,character1)
         character2Luck = managementObject.loadcharacterluck(None,character2)
         print(character1 + "'s starting health is " + str(character1Health))
@@ -138,6 +164,7 @@ class Fighting(object):
                     print(character2 + "'s health is now " + str(character2Health))
                     if character2Health <= 0:
                         print(character1 + " is the winner")
+                        increment1()
                         return False
             if character1DiceRoll < 10:
                 print(character1 + " missed")
@@ -157,6 +184,7 @@ class Fighting(object):
                     print(character1 + "'s health is now " + str(character1Health))
                     if character1Health <= 0:
                         print(character2 + " is the winner")
+                        increment2()
                         return False
             if character2DiceRoll < 10:
                 print(character2 + " missed")
@@ -173,14 +201,21 @@ class Fighting(object):
                 print("The winner will be the character with the most wins")
                 time.sleep(1)
                 print("Round 1 is a test of Strength ")
-                time.sleep(1)
+                time.sleep(3)
                 self.stregntghcompetition(self, character1, character2)
                 print("Round 2 is a test of Intelligence ")
-                time.sleep(1)
+                time.sleep(3)
                 self.intelligencecompetition(self, character1, character2)
                 print("Round 3 is a test of Dexterity ")
-                time.sleep(1)
+                time.sleep(3)
                 self.dexterityncecompetition(self, character1, character2)
+                time.sleep(3)
+                if character1wins > character2wins:
+                    print(character1 + " is the ultimate winner, winning " + str(increment1() - 1) + " out of 3 rounds")
+                    reset()
+                else:
+                    print(character2 + " is the ultimate winner, winning " + str(increment2() - 1) + " out of 3 rounds")
+                    reset()
             else:
                 print("One or more characters do not exist.")
         else:
