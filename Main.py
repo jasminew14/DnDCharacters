@@ -2,7 +2,7 @@ from Character import Character
 from Management import Management
 from Fighting import Fighting
 
-o = Management
+management_object = Management
 fighting = Fighting
 print("Welcome to your character creator")
 
@@ -15,35 +15,36 @@ def main():
         print("Enter [D] to quit")
         choice = input("Enter choice: ").upper()
         if choice == "A":
-            name = input("Enter a character name: ")
+            name = input("Enter a character name: ")  # #Inputting your character name
             name = name.lower()
-            name = name.capitalize()
-            objectname = Character(name)
-            print(objectname)
+            name = name.capitalize()  # #Making sure the naming convention is consistent
+            object_name = Character(name)
+            print(object_name)
             print("Do you want to save character? ")
             print("Enter A or press any key to quit")
             choice = input("Enter choice: ").upper()
             if choice == "A":
-                if o.save(None,name):
-                    f = open('Saves.txt', 'a')
-                    f.write(objectname.getattributes())
+                if management_object.save(name):
+                    f = open('Saves.txt', 'a')  # # Opening the text file
+                    f.write(object_name.getattributes())  # # Saving the attributes of the object
                     f.close()
                 else:
                     continue
         elif choice == "B":
-            o.showcharacters(None)
+            management_object.show_characters()  # # Showing the a list of characters in the table format
         elif choice == "C":
             filename = input("Enter the name of your first character: ")
             filename = filename.lower()
-            filename = filename.capitalize()
+            filename = filename.capitalize()  # #Making sure the naming convention is consistent
             filename2 = input("Enter the name of your second character: ")
             filename2 = filename2.lower()
-            filename2 = filename2.capitalize()
-            fighting.fightingtournement(Fighting, filename, filename2)
+            filename2 = filename2.capitalize()  # #Making sure the naming convention is consistent
+            fighting.fighting_tournament(Fighting, filename, filename2)  # # Starting the fighting simulation
         elif choice == "D":
             print("Bye Bye")
             break
         else:
             print("Please chose A, B, C, D or E")
+
 
 main()
