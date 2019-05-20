@@ -17,184 +17,185 @@ def increment2():
     character2wins = character2wins + 1
     return character2wins
 
+
 def reset():
     global character1wins
     global character2wins
     character1wins = 0
     character2wins = 0
 
+
 class Fighting(object):
 
-
-    def rolldice(self):
+    @staticmethod
+    def roll_dice():
         return random.randint(1, 20)
 
-    def stregntghcompetition(self, character1, character2):
-        managementObject = Management
-        character1Health = managementObject.loadcharacterhealth(None, character1)
-        character2Health = managementObject.loadcharacterhealth(None, character2)
-        character1Strength = managementObject.loadcharacterstrength(None,character1)
-        character2Strength = managementObject.loadcharacterstrength(None,character2)
-        character1Luck = managementObject.loadcharacterluck(None,character1)
-        character2Luck = managementObject.loadcharacterluck(None,character2)
-        print(character1 + "'s starting health is " + str(character1Health))
-        print(character2 + "'s starting health is " + str(character2Health))
+    def strength_competition(self, character1, character2):
+        management_object = Management     # # Creating a management object
+        character1_health = management_object.load_character_health(character1)     # # Loading character1 health
+        character2_health = management_object.load_character_health(character2)     # # Loading character2 health
+        character1_strength = management_object.load_character_strength(character1)     # # Loading character1 strength
+        character2_strength = management_object.load_character_strength(character2)     # # Loading character1 strength
+        character1_luck = management_object.load_character_luck(character1)     # # Loading character1 luck
+        character2_luck = management_object.load_character_luck(character2)     # # Loading character1 luck
+        print(character1 + "'s starting health is " + str(character1_health))     # # Printing starting health
+        print(character2 + "'s starting health is " + str(character2_health))
         while True:
-            character1DiceRoll = self.rolldice(None)
-            character2DiceRoll = self.rolldice(None)
+            character1_dice_roll = self.roll_dice()     # # Dice roll object
+            character2_dice_roll = self.roll_dice()
             print("It's " + character1 + "'s turn")
-            if character1DiceRoll >= 10:
-                character2Health = character2Health - character1Strength
+            if character1_dice_roll >= 10:
+                character2_health = character2_health - character1_strength     # # Taking character health away
                 print(character1 + " hits " + character2)
                 print(character2 + " gets a chance to roll again to dodge")
-                luckRoll = self.rolldice(None)
-                if luckRoll == character2Luck:
-                    character2Health = character2Health + character1Strength
+                luck_roll = self.roll_dice()     # # Luck roll gives you a chance to dodge
+                if luck_roll == character2_luck:
+                    character2_health = character2_health + character1_strength     # # If roll equal luck you dodge
                     print(character2 + " dodges")
-                    print(character2 + "'s health is still " + str(character2Health))
+                    print(character2 + "'s health is still " + str(character2_health))
                 else:
-                    print(character2 + " couldn't dodge")
-                    print(character2 + "'s health is now " + str(character2Health))
-                    if character2Health <= 0:
+                    print(character2 + " couldn't dodge")     # # If you can't dodge your health is damaged
+                    print(character2 + "'s health is now " + str(character2_health))     # # Showing characters health
+                    if character2_health <= 0:      # # If character2 health is less than 2 character1 wins
                         print(character1 + " is the winner")
-                        increment1()
+                        increment1()      # # Incrementing wins
                         return False
-            if character1DiceRoll < 10:
+            if character1_dice_roll < 10:     # # If dice roll is less than 10 characters missed
                 print(character1 + " missed")
 
             print("It's " + character2 + "'s turn")
-            if character2DiceRoll >= 10:
-                character1Health = character1Health - character2Strength
+            if character2_dice_roll >= 10:
+                character1_health = character1_health - character2_strength
                 print(character2 + " hits " + character1)
                 print(character1 + " gets a chance to roll again to dodge")
-                luckRoll = self.rolldice(None)
-                if luckRoll == character1Luck:
-                    character1Health = character1Health + character2Strength
+                luck_roll = self.roll_dice()
+                if luck_roll == character1_luck:
+                    character1_health = character1_health + character2_strength
                     print(character1 + " dodges")
-                    print(character1 + "'s health is still " + str(character1Health))
+                    print(character1 + "'s health is still " + str(character1_health))
                 else:
                     print(character1 + " couldn't dodge")
-                    print(character1 + "'s health is now " + str(character1Health))
-                    if character1Health <= 0:
+                    print(character1 + "'s health is now " + str(character1_health))
+                    if character1_health <= 0:
                         print(character2 + " is the winner")
                         increment2()
                         return False
-            if character2DiceRoll < 10:
+            if character2_dice_roll < 10:
                 print(character2 + " missed")
 
-
-    def intelligencecompetition(self, character1, character2):
-        managementObject = Management
-        character1Health = managementObject.loadcharacterhealth(None, character1)
-        character2Health = managementObject.loadcharacterhealth(None, character2)
-        character1Intelligence = managementObject.loadcharacterintelligence(None,character1)
-        character2Intelligence = managementObject.loadcharacterintelligence(None,character2)
-        character1Luck = managementObject.loadcharacterluck(None,character1)
-        character2Luck = managementObject.loadcharacterluck(None,character2)
-        print(character1 + "'s starting health is " + str(character1Health))
-        print(character2 + "'s starting health is " + str(character2Health))
+    def intelligence_competition(self, character1, character2):      # # Similar to strength competition
+        management_object = Management
+        character1_health = management_object.load_character_health(character1)
+        character2_health = management_object.load_character_health(character2)
+        character1_intelligence = management_object.load_character_intelligence(character1)
+        character2_intelligence = management_object.load_character_intelligence(character2)
+        character1_luck = management_object.load_character_luck(character1)
+        character2_luck = management_object.load_character_luck(character2)
+        print(character1 + "'s starting health is " + str(character1_health))
+        print(character2 + "'s starting health is " + str(character2_health))
         while True:
-            character1DiceRoll = self.rolldice(None)
-            character2DiceRoll = self.rolldice(None)
+            character1_dice_roll = self.roll_dice()
+            character2_dice_roll = self.roll_dice()
             print("It's " + character1 + "'s turn")
-            if character1DiceRoll >= 10:
-                character2Health = character2Health - character1Intelligence
+            if character1_dice_roll >= 10:
+                character2_health = character2_health - character1_intelligence
                 print(character1 + " hits " + character2)
                 print(character2 + " gets a chance to roll again to dodge")
-                luckRoll = self.rolldice(None)
-                if luckRoll == character2Luck:
-                    character2Health = character2Health + character1Intelligence
+                luck_roll = self.roll_dice()
+                if luck_roll == character2_luck:
+                    character2_health = character2_health + character1_intelligence
                     print(character2 + " dodges")
-                    print(character2 + "'s health is still " + str(character2Health))
+                    print(character2 + "'s health is still " + str(character2_health))
                 else:
                     print(character2 + " couldn't dodge")
-                    print(character2 + "'s health is now " + str(character2Health))
-                    if character2Health <= 0:
+                    print(character2 + "'s health is now " + str(character2_health))
+                    if character2_health <= 0:
                         print(character1 + " is the winner")
                         increment1()
                         return False
-            if character1DiceRoll < 10:
+            if character1_dice_roll < 10:
                 print(character1 + " missed")
 
             print("It's " + character2 + "'s turn")
-            if character2DiceRoll >= 10:
-                character1Health = character1Health - character2Intelligence
+            if character2_dice_roll >= 10:
+                character1_health = character1_health - character2_intelligence
                 print(character2 + " hits " + character1)
                 print(character1 + " gets a chance to roll again to dodge")
-                luckRoll = self.rolldice(None)
-                if luckRoll == character1Luck:
-                    character1Health = character1Health + character2Intelligence
+                luck_roll = self.roll_dice()
+                if luck_roll == character1_luck:
+                    character1_health = character1_health + character2_intelligence
                     print(character1 + " dodges")
-                    print(character1 + "'s health is still " + str(character1Health))
+                    print(character1 + "'s health is still " + str(character1_health))
                 else:
                     print(character1 + " couldn't dodge")
-                    print(character1 + "'s health is now " + str(character1Health))
-                    if character1Health <= 0:
+                    print(character1 + "'s health is now " + str(character1_health))
+                    if character1_health <= 0:
                         print(character2 + " is the winner")
                         increment2()
                         return False
-            if character2DiceRoll < 10:
+            if character2_dice_roll < 10:
                 print(character2 + " missed")
 
-    def dexterityncecompetition(self, character1, character2):
-        managementObject = Management
-        character1Health = managementObject.loadcharacterhealth(None, character1)
-        character2Health = managementObject.loadcharacterhealth(None, character2)
-        character1Dexterity = managementObject.loadcharacterdexterity(None,character1)
-        character2Dexterity = managementObject.loadcharacterdexterity(None,character2)
-        character1Luck = managementObject.loadcharacterluck(None,character1)
-        character2Luck = managementObject.loadcharacterluck(None,character2)
-        print(character1 + "'s starting health is " + str(character1Health))
-        print(character2 + "'s starting health is " + str(character2Health))
+    def dexterity_competition(self, character1, character2):     # # Similar to strength competition
+        management_object = Management
+        character1_health = management_object.load_character_health(character1)
+        character2_health = management_object.load_character_health(character2)
+        character1_dexterity = management_object.load_character_dexterity(character1)
+        character2_dexterity = management_object.load_character_dexterity(character2)
+        character1_luck = management_object.load_character_luck(character1)
+        character2_luck = management_object.load_character_luck(character2)
+        print(character1 + "'s starting health is " + str(character1_health))
+        print(character2 + "'s starting health is " + str(character2_health))
         while True:
-            character1DiceRoll = self.rolldice(None)
-            character2DiceRoll = self.rolldice(None)
+            character1_dice_roll = self.roll_dice()
+            character2_dice_roll = self.roll_dice()
             print("It's " + character1 + "'s turn")
-            if character1DiceRoll >= 10:
-                character2Health = character2Health - character1Dexterity
+            if character1_dice_roll >= 10:
+                character2_health = character2_health - character1_dexterity
                 print(character1 + " hits " + character2)
                 print(character2 + " gets a chance to roll again to dodge")
-                luckRoll = self.rolldice(None)
-                if luckRoll == character2Luck:
-                    character2Health = character2Health + character1Dexterity
+                luck_roll = self.roll_dice()
+                if luck_roll == character2_luck:
+                    character2_health = character2_health + character1_dexterity
                     print(character2 + " dodges")
-                    print(character2 + "'s health is still " + str(character2Health))
+                    print(character2 + "'s health is still " + str(character2_health))
                 else:
                     print(character2 + " couldn't dodge")
-                    print(character2 + "'s health is now " + str(character2Health))
-                    if character2Health <= 0:
+                    print(character2 + "'s health is now " + str(character2_health))
+                    if character2_health <= 0:
                         print(character1 + " is the winner")
                         increment1()
                         return False
-            if character1DiceRoll < 10:
+            if character1_dice_roll < 10:
                 print(character1 + " missed")
 
             print("It's " + character2 + "'s turn")
-            if character2DiceRoll >= 10:
-                character1Health = character1Health - character2Dexterity
+            if character2_dice_roll >= 10:
+                character1_health = character1_health - character2_dexterity
                 print(character2 + " hits " + character1)
                 print(character1 + " gets a chance to roll again to dodge")
-                luckRoll = self.rolldice(None)
-                if luckRoll == character1Luck:
-                    character1Health = character1Health + character2Dexterity
+                luck_roll = self.roll_dice()
+                if luck_roll == character1_luck:
+                    character1_health = character1_health + character2_dexterity
                     print(character1 + " dodges")
-                    print(character1 + "'s health is still " + str(character1Health))
+                    print(character1 + "'s health is still " + str(character1_health))
                 else:
                     print(character1 + " couldn't dodge")
-                    print(character1 + "'s health is now " + str(character1Health))
-                    if character1Health <= 0:
+                    print(character1 + "'s health is now " + str(character1_health))
+                    if character1_health <= 0:
                         print(character2 + " is the winner")
                         increment2()
                         return False
-            if character2DiceRoll < 10:
+            if character2_dice_roll < 10:
                 print(character2 + " missed")
 
-    def fightingtournement(self, character1, character2):
-        managementObject = Management
-        if character1 != character2:
-            if managementObject.checkifexists(None, character1,character2):
+    def fighting_tournament(self, character1, character2):
+        management_object = Management
+        if character1 != character2:     # # Checking that two characters aren't the same
+            if management_object.checkifexists(character1,character2):     # # Checking that characters exist
                 print("Your first character is " + character1)
-                time.sleep(1)
+                time.sleep(1)      # # Setting a delay
                 print("Your second character is " + character2)
                 time.sleep(1)
                 print("The there will be three rounds ")
@@ -202,15 +203,16 @@ class Fighting(object):
                 time.sleep(1)
                 print("Round 1 is a test of Strength ")
                 time.sleep(3)
-                self.stregntghcompetition(self, character1, character2)
+                self.strength_competition(self, character1, character2)     # # Strength competition
                 print("Round 2 is a test of Intelligence ")
                 time.sleep(3)
-                self.intelligencecompetition(self, character1, character2)
+                self.intelligence_competition(self, character1, character2)     # # Intelligence competition
                 print("Round 3 is a test of Dexterity ")
                 time.sleep(3)
-                self.dexterityncecompetition(self, character1, character2)
+                self.dexterity_competition(self, character1, character2)     # # Dexterity competition
                 time.sleep(3)
                 if character1wins > character2wins:
+                    # # Showing who won out of three rounds
                     print(character1 + " is the ultimate winner, winning " + str(increment1() - 1) + " out of 3 rounds")
                     reset()
                 else:
@@ -220,5 +222,3 @@ class Fighting(object):
                 print("One or more characters do not exist.")
         else:
             print("You must enter two different characters")
-
-
