@@ -25,11 +25,11 @@ def main():
             choice = input("Enter choice: ").upper()
             if choice == "A":
                 if management_object.save(name):
+                    continue
+                else:
                     f = open('Saves.txt', 'a')  # # Opening the text file
                     f.write(object_name.getattributes())  # # Saving the attributes of the object
                     f.close()
-                else:
-                    continue
         elif choice == "B":
             management_object.show_characters()  # # Showing the a list of characters in the table format
         elif choice == "C":
