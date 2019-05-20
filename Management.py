@@ -1,26 +1,70 @@
+
 class Management(object):
 
-    def save(self,name):
-        with open('Saves.txt', 'r') as datafile:
-            for line in datafile:
-                if name not in line:
-                    return True
-                else:
-                    print("Please try a new name")
-                    return False
-
-    def showcharacters(self):
-        headers = ["Name","Race","Health","Luck","Strength","Intelligence","Dexterity"]
-        print("   ".join(headers))
+    @staticmethod
+    def save(name):   # # Making a method that saves a character and checks if the name exists
         for line in open("Saves.txt", "r"):
-            line = line.strip().split(",")
+            if line.startswith(name):    # # Checking if inputted character name exists already
+                print("Please try a new name")
+                return False
+
+    @staticmethod
+    def checkifexists(name, name2):   # #  Checking if both character exists
+        if name and name2 in open('Saves.txt').read():
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def show_characters():
+        # # Showing list of characters
+        headers = ["Name  ", "Race", "Health", "Luck", "Strength", "Intelligence", "Dexterity "]
+        print("%-8s " % "       ".join(headers))
+        for line in open("Saves.txt", "r"):
+            line = line.strip().split(",")    # # Splitting the lust via commas
             line.append(str(int(line[3]) - int(line[5])))
             for i, word in enumerate(line):
                 if i == 7:
                     continue
-                print(word.ljust(len(headers[i - (i > 4)])), end="    " * ((i - (i > 4)) != len(headers) - 1))
+                print("%-8s" % word.ljust(len(headers[i - (i > 7)])), end="     " * ((i - (i > 7)) != len(headers) - 1))
             print()
 
-    def loadcharacterstats(self,name):
+    @staticmethod
+    def load_character_health(name):     # # Loading a specific attribute from a specific character
+        for line in open("Saves.txt", "r"):
+            if line.startswith(name):
+                line = line.strip().split(",")
+                health = int(line[2])
+                return health
 
-        breakpoint()
+    @staticmethod
+    def load_character_luck(name):     # # Loading a specific attribute from a specific character
+        for line in open("Saves.txt", "r"):
+            if line.startswith(name):
+                line = line.strip().split(",")
+                luck = int(line[3])
+                return luck
+
+    @staticmethod
+    def load_character_strength(name):     # # Loading a specific attribute from a specific character
+        for line in open("Saves.txt", "r"):
+            if line.startswith(name):
+                line = line.strip().split(",")
+                strength = int(line[4])
+                return strength
+
+    @staticmethod
+    def load_character_intelligence(name):     # # Loading a specific attribute from a specific character
+        for line in open("Saves.txt", "r"):
+            if line.startswith(name):
+                line = line.strip().split(",")
+                intelligence = int(line[5])
+                return intelligence
+
+    @staticmethod
+    def load_character_dexterity(name):     # # Loading a specific attribute from a specific character
+        for line in open("Saves.txt", "r"):
+            if line.startswith(name):
+                line = line.strip().split(",")
+                dexterity = int(line[6])
+                return dexterity
