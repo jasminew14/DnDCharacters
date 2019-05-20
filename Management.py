@@ -3,10 +3,12 @@ class Management(object):
 
     @staticmethod
     def save(name):   # # Making a method that saves a character and checks if the name exists
-        for line in open("Saves.txt", "r"):
-            if line.startswith(name):    # # Checking if inputted character name exists already
-                print("Please try a new name")
-                return False
+        if name in open('Saves.txt').read():
+            print("Please try a new name")
+            return True
+        else:
+            print("Your character was saved ")
+            return False
 
     @staticmethod
     def checkifexists(name, name2):   # #  Checking if both character exists
